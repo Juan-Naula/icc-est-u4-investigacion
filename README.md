@@ -101,26 +101,137 @@ En esta sección se presentan las clases creadas dentro del proyecto y el análi
 ### **Código del ejemplo**
 
 ```java
-public void ejemplo() {
-    System.out.println("Ejemplo O(1)");
-    int x = 10;
-    int y = 5;
-    int suma = x + y;
+public int obtenerPrimerElemento(int[] array) {
+    return array[0];
 }
 ```
 
 ### **Explicación resumida**
 
-*(Aquí el estudiante explica por qué es O(1))*
+Accede a un elemento en tiempo constante; la duración no depende del tamaño de la entrada (O(1)).
 
----
-**PARA CADA COMPLEJIDAD, REPETIR LA ESTRUCTURA ANTERIOR**
+### **Archivo:** `ComplejidadCuadratica.java`
+
+### **Código del ejemplo**
+
+```java
+public int[] bubbleSort(int[] array) {
+        int[] resultado = array.clone();
+        
+        for (int i = 0; i < resultado.length - 1; i++) {
+            for (int j = 0; j < resultado.length - i - 1; j++) {
+                if (resultado[j] > resultado[j + 1]) {
+                    int temp = resultado[j];
+                    resultado[j] = resultado[j + 1];
+                    resultado[j + 1] = temp;
+                }
+            }
+        }
+        
+        return resultado;
+}
+```
+
+### **Explicación resumida**
+
+    Dos bucles anidados comparan elementos; en el peor caso las operaciones crecen proporcionalmente a n² (O(n²)).
+
+### **Archivo:** `ComplejidadLineal.java`
+
+### **Código del ejemplo**
+
+```java
+public int sumarElementos(int[] array) {
+        int suma = 0;
+        for (int num : array) {
+            suma += num;
+        }
+        return suma;
+}
+```
+
+### **Explicación resumida**
+
+Recorre todos los elementos una vez; el tiempo crece proporcionalmente al número de elementos (O(n)).
+
+### **Archivo:** `ComplejidadLogaritmica.java`
+
+### **Código del ejemplo**
+
+```java
+public int busquedaBinaria(int[] array, int objetivo) {
+        int izquierda = 0, derecha = array.length - 1;
+        
+        while (izquierda <= derecha) {
+            int medio = izquierda + (derecha - izquierda) / 2;
+            
+            if (array[medio] == objetivo) {
+                return medio;
+            } else if (array[medio] < objetivo) {
+                izquierda = medio + 1;
+            } else {
+                derecha = medio - 1;
+            }
+        }
+        return -1;
+    }
+```
+
+### **Explicación resumida**
+
+Divide el espacio de búsqueda a la mitad en cada paso, por eso el número de pasos crece como el logaritmo de n (O(log n)).
+
+### **Archivo:** `ComplejidadNLogN.java`
+
+### **Código del ejemplo**
+
+```java
+public int[] mergeSort(int[] array) {
+        if (array.length <= 1) {
+            return array;
+        }
+        
+        int medio = array.length / 2;
+        int[] izquierda = new int[medio];
+        int[] derecha = new int[array.length - medio];
+        
+        System.arraycopy(array, 0, izquierda, 0, medio);
+        System.arraycopy(array, medio, derecha, 0, array.length - medio);
+        
+        return fusionar(mergeSort(izquierda), mergeSort(derecha));
+}
+    
+    private int[] fusionar(int[] izquierda, int[] derecha) {
+        int[] resultado = new int[izquierda.length + derecha.length];
+        int i = 0, j = 0, k = 0;
+        
+        while (i < izquierda.length && j < derecha.length) {
+            if (izquierda[i] <= derecha[j]) {
+                resultado[k++] = izquierda[i++];
+            } else {
+                resultado[k++] = derecha[j++];
+            }
+        }
+        
+        while (i < izquierda.length) {
+            resultado[k++] = izquierda[i++];
+        }
+        
+        while (j < derecha.length) {
+            resultado[k++] = derecha[j++];
+        }
+        
+        return resultado;
+    }
+```
+
 
 
 # **Conclusiones**
 
-*(Aquí el estudiante agrega conclusiones propias del trabajo)*
+Este trabajo nos ayuda a saber mas como utilizar estos tipos de complejidades ya sea para entender como escalan los algoritmos y poder 
+predecir sus comportamientos en diferentes condiciones
 
-**POR ESTUDIANTE**: *(Nombre completo del estudiante)*
+**POR ESTUDIANTE**: *Juan Miguel Naula Abad*
 
 ---
